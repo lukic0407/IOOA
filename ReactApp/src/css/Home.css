@@ -1,0 +1,53 @@
+header{
+    display: flex;
+    background-color: #2e3f6e;
+    justify-content: center;
+}
+header ul{
+    list-style-type: none;
+}
+
+.Header-wrap{
+    width: 100%;
+    display: flex;
+}
+
+.Header-menu-wrap{
+    width: max-content;
+}
+
+.Header-menu-wrap.Align-left{
+    margin-left:auto;
+    padding-right: 30px;
+}
+
+.List-wrap{
+    display: flex;
+    width: max-content;
+}
+
+.Header-wrap .List-item a{
+    color: whitesmoke;
+    font-size: 18px;
+    font-weight: 600;
+    font-family: system-ui;
+    transition: 0.2s ease-in-out;
+    padding: 10px 0px 10px 60px;
+    text-decoration: none;
+}
+
+.Header-wrap .List-item a:hover{
+    
+    color: #4DB7FE;
+}
+
+.hero-background{
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+    width: 100%;
+    flex-direction: column;
+    background-image: url('../img/Naslovna.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+}
