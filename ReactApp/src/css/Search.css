@@ -1,0 +1,61 @@
+.search-wrap{
+    display: flex;
+}
+
+.maps-wrap{
+    flex: 3;
+}
+.search-accommodation{
+    display: flex;
+    flex-wrap: wrap;
+    flex: 2;
+    width: max-content;
+    height: 100vh;
+    background: whitesmoke;
+    overflow-y: scroll;
+    align-content: flex-start;
+}
+.search-accommodation-wrap {
+    padding: 0px 0px 20px 15px;
+    width: calc(50% - 15px);
+    height: auto;
+    border-radius: 10px;
+}
+.search-thumbnail-holder {
+    aspect-ratio: 16/11;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.search-thumbnail-holder img {
+    height: 100%;
+    aspect-ratio: 16/11;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: 500ms;
+}
+
+.search-thumbnail-holder  img:hover{
+    transform: scale(1.1);
+    filter: brightness(1);
+}
+.search-accommodation-description{
+    height: max-content;
+    padding: 10px 0px 0px 10px;
+    max-width: 100%;
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 20px;
+    margin-top: -40px;
+}
+.search-accommodation-description h3{
+    margin: 0px;
+    font-size: 22px;
+}
+.search-accommodation-description .icon{
+    width: 18px;
+    height: 18px;
+}
+.search-accommodation-thumbnail, .search-accommodation-description{
+    position: relative;
+}

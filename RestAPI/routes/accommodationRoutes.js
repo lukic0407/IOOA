@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const accommodationController = require('../Controller/accommodationController')
+const accommodationIdMiddleWare = require('../Middleware/getAccommodation')
 const verifyJWT = require('../Middleware/verifyJWT')
 const verifyRoles = require('../Middleware/verifyRoles')
 const multer = require('multer');
@@ -36,11 +37,10 @@ var multipleUpload = upload.fields([{name: 'images', maxCount:1}, {name: 'galler
 //Getting all users
 router.route('/')
     .post(multipleUpload, accommodationController.addAccommodation)
-/*router.route('/:id')
-    .get(verifyJWT.verifyJWT,verifyRoles(9971),userIdMiddleWare.getUser, userController.getUser)
-    .patch(userIdMiddleWare.getUser, userController.updateUser)
-    .delete(userIdMiddleWare.getUser, userController.deleteUser)
-    */
+    .get(accommodationController.getAccommodations)
+
+router.route('/:id')
+    .get(accommodationIdMiddleWare.getAccommodation ,accommodationController.getAccommodation)
     
 
 

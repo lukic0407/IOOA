@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import Accomodation from "./Accommodation";
-
+import Accomodations from "./Accommodation";
+import Categories from "./Categories";
+import Stats from "./Stats";
 const HomePage = () =>{
     const [searchValue, setSearch] = useState('')
 
 
     return (
+        <>
         <div className="hero-background">
             <div className="hero-content">
-                <form>
+                <form className="search-form">
                     <input
                         type="text"
                         id="search"
@@ -17,12 +19,15 @@ const HomePage = () =>{
                         onChange={e => setSearch(e.target.value)}
                         value={searchValue}
                     ></input>
-                    <button>Pretraga</button>
+                    <button className="search-button">Pretraga</button>
                 </form>
             </div>
-            <Accomodation></Accomodation>
+            
         </div>
-        
+        <Accomodations/>
+        <Categories/>
+        <Stats/>
+        </>
     )
 } 
 

@@ -28,7 +28,7 @@ const HeaderContent = () =>{
                     </div>
                     <div className="Header-menu-wrap Align-left">
                         <ul className="List-wrap">{logedIn
-                            ?   <li className="List-item"><Link to="/" onClick={signOut}>Odjava</Link></li>
+                            ?   <li className="List-item"><Link to="/profil" >Profil</Link></li>
                             :   <li className="List-item"><Link to="/prijava">Prijava</Link></li>} 
                         </ul>
                     </div>

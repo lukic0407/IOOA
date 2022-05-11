@@ -57,16 +57,7 @@ const AddAccomodationForm = () => {
             );
             console.log(response.data)
             console.log(JSON.stringify(response))
-            //setSuccess(true)
-        } catch (error) {/*
-            if(!error?.response){
-                setErrMsg('No Server Response');
-            }else if(error.response?.status === 409){
-                setErrMsg('Username Taken')
-            }else{
-                setErrMsg('Registration Failed')
-            }
-            errRef.current.focus()*/
+        } catch (error) {
             console.log(error)
         }
     }

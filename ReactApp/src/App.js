@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import logo from './logo.svg';
 import Register from './Components/Register';
@@ -10,6 +11,9 @@ import LinkPage from './Components/LinkPage';
 import PersistLogin from './Components/PersistLogin';
 import AccomodationSingle from './Components/AccommodationSingle';
 import AddAccomodationForm from './Components/AddAccomodationForm';
+import Profile from './Components/Profile';
+import Search from './Components/Search';
+
 const ROLES = {
   "Owner": 9971,
   "Admin": 1573,
@@ -19,18 +23,21 @@ const ROLES = {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route element={<PersistLogin></PersistLogin>}>
+      <Route element={<PersistLogin></PersistLogin>}>
+        <Route path="/" element={<Layout />}>
           {/*Public pages*/}
           <Route path="/smjestaj/:id" element={<AccomodationSingle></AccomodationSingle>}></Route>
           <Route path="/" element={<HomePage></HomePage>}></Route>
           <Route path="linkpage" element={<LinkPage></LinkPage>}></Route>
           <Route path="prijava" element={<Login />} />
           <Route path="registracija" element={<Register />} />
+          <Route path="/smjestaji" element={<Search></Search>}></Route>
           {/*Private pages*/}
           <Route element={<RequireAuth allowedRoles={[ROLES.Owner]}></RequireAuth>}>
-            <Route path="profile" element={<HomePage></HomePage>}></Route>
+          <Route path="/profil" element={<Profile />}>
+            <Route path="nadzorna_ploca" element={<></>}></Route>
             <Route path="dodaj_smjestaj" element={<AddAccomodationForm></AddAccomodationForm>}></Route>
+          </Route>
           </Route>
         </Route>
         {/*Other pages*/}

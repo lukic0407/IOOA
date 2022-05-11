@@ -1,0 +1,49 @@
+.hero-background-profile{
+    min-height: 250px;
+    height: 20vh;
+    background-color: #4DB7FE;
+}
+
+.main-content-wrap{
+    background-color: #f6f6f6;
+}
+
+.main-content{
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+   
+}
+
+.menu-list{
+    text-align: left;
+    width: 100%;
+    margin: 0px;
+    list-style: none;
+    padding: 0px;
+}
+
+.list-item{
+    padding: 15px 10px 15px 10px;
+    height: auto;
+    border-bottom: 1px #eaeaea solid;
+}
+.list-item a{
+    width: 100%;
+    padding: 15px 10px 15px 10px;
+    color: #4DB7FE;
+    text-decoration: none;
+    
+}
+
+.side-menu-wrap{
+    padding-top: 20px;
+}
+
+.side-menu{
+    width: max-content;
+    border-radius: 10px;
+    background: white;
+    border: 1px #eaeaea solid;
+    height: fit-content;
+}

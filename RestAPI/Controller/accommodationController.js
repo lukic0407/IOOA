@@ -63,7 +63,23 @@ const addAccommodation = async (req,res)=>{
     }
 }
 
+const getAccommodations = async (req,res)=>{
+    try{
+        const accommodations = await accommodationModel.find()
+        res.json(accommodations);
+    }catch(err){
+        res.status(500).json({message: err.message});
+    }
+}
+
+const getAccommodation = (req,res)=>{
+    console.log("sending accommodation");
+    res.send(res.accommodation);
+}
+
 module.exports = {
-    addAccommodation
+    addAccommodation,
+    getAccommodations,
+    getAccommodation
 }
 

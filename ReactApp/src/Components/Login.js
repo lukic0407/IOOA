@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef} from "react";
 import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 import {Link, useNavigate, useLocation} from 'react-router-dom'
+import '../css/LoginPage.css'
 const LOGIN_URL = '/auth/login';
 
 const Login = () =>{
@@ -69,10 +70,15 @@ const Login = () =>{
     },[persist])
 
     return(
-        <section onSubmit={handleSubmit}>
+        <>
+    <div className="hero-background">
+            <h1 className="login-title">Prijava
+                <hr className="hero-divider"></hr>
+            </h1>
+    </div>
+        <section className="login-wrap" >
             <p ref={errRef} className={errMsg ? 'error' : 'hide'} aria-live='assertive'>{errMsg}</p>
-            <h1>Sign In</h1>
-            <form>
+            <form className="login-form" onSubmit={handleSubmit}>
                 <label htmlFor="username">Username:</label>
                 <input
                     type="text"
@@ -99,17 +105,21 @@ const Login = () =>{
                     onChange={togglePersist}
                     >
                     </input>
-                    <label htmlFor="persist">Trust this device</label>
+                    <label htmlFor="persist">Vjeruj ovom uređaju</label>
                 </div>
-                <button>Sign In</button>
-            </form>
-            <p>Need an Account?<br/>
-                <span className="line">
-                    <a href='#'>Sign Up</a>
+                <button className="login-button">Prijavi se</button>
+                <div className="form-reminder">
+                <p>Nemaš još račun?<br/>
+                    <span className="line">
+                    <Link to="/registracija">Registriraj se</Link>
                 </span>
-
             </p>
+                
+            </div>
+            </form>
+
         </section>
+        </>
     )
 }
 
