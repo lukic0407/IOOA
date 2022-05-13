@@ -1,13 +1,15 @@
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import '../css/AddAccommodation.css'
+import 'leaflet/dist/leaflet.css';
 import { useState, useEffect, useRef, useMemo, useCallback} from "react"
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import env from "react-dotenv";
 import L from 'leaflet';
 import osm from "../context/OsmProvider"
-import 'leaflet/dist/leaflet.css';
+
 
 const AddAccomodationForm = () => {
-    const API_KEY = 'AIzaSyBdcwGjimzRU8a3JFIKgCSn15b0eH8j1Hg';
+    const API_KEY = env.API_KEY_GMAPS;
     const ZOOM_LEVEL = 13;
     var FormData = require('form-data');
     const axiosPrivate = useAxiosPrivate();
