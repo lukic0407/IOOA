@@ -38,6 +38,10 @@ const AccommodationSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     },
+    location:{
+        type:Object,
+        required: true
+    },
     images_single:{
         type:String,
         required:false

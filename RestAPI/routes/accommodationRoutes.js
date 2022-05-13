@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const accommodationController = require('../Controller/accommodationController')
 const accommodationIdMiddleWare = require('../Middleware/getAccommodation')
+const accommodationController = require('../Controller/accommodationController')
 const verifyJWT = require('../Middleware/verifyJWT')
 const verifyRoles = require('../Middleware/verifyRoles')
 const multer = require('multer');
@@ -41,7 +41,5 @@ router.route('/')
 
 router.route('/:id')
     .get(accommodationIdMiddleWare.getAccommodation ,accommodationController.getAccommodation)
-    
-
 
 module.exports = router

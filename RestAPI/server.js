@@ -24,10 +24,12 @@ app.use('/uploads/accommodation',express.static('uploads/accommodation'))
 const authRouter = require("./routes/authRoutes")
 const userDataRouter = require("./routes/userRoute")
 const accommodationDataRouter = require('./routes/accommodationRoutes')
+const accommodationTypeRouter = require('./routes/accommodationTypeRouter')
 
 app.use('/auth',authRouter)
 app.use('/users', userDataRouter)
 app.use('/accommodation',accommodationDataRouter);
+app.use('/types/accommodation',accommodationTypeRouter);
 
 //app.use(verifyJWT.verifyJWT)
 
