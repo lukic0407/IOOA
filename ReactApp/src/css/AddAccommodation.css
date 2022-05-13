@@ -62,7 +62,7 @@
     width: 31%;
 }
 
-.input input{
+.input input, .input select{
     line-height: 19px;
     padding: 14px 20px;
     width: 90%;
@@ -73,6 +73,9 @@
     background: #f9f9f9;
     border: 1px solid #e5e7f2;
 }
+.input select{
+    width: 100%;
+}
 
 .input label{
     display: block;
@@ -82,4 +85,8 @@
 
 .clearfix {
     display: inline-block;
+}
+
+.map-wrap, .leaflet-container{
+    height: 300px;
 }

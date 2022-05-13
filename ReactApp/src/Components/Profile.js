@@ -1,9 +1,17 @@
-import {Link} from 'react-router-dom'
+import {Link, Navigate} from 'react-router-dom'
 import { Outlet } from "react-router-dom";
 import React, { useState } from "react";
 import '../css/Profile.css';
+import useLogout from '../hooks/useLogout';
 
 const Profile = () =>{
+    const logout = useLogout();
+    
+    const signOut = async() =>{
+        await logout();
+        Navigate('/');
+    }
+
     return(
         <>
             <div className="hero-background-profile">
@@ -20,7 +28,7 @@ const Profile = () =>{
                         <Link to='/profil/nadzorna_ploca'>Nadzorna Ploča</Link></li>
                     <li className='list-item' key={'dodaj-objekt'}>
                         <Link to='/profil/dodaj_smjestaj'>Dodaj Objekt</Link></li>
-                    <li className='list-item' key={'odjava'}><button className='login-button'>Odjava</button></li>
+                    <li className='list-item' key={'odjava'} onClick={signOut}><button className='login-button'>Odjava</button></li>
                 </ul>
             </div>
             </div> 

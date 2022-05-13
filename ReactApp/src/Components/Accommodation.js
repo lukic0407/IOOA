@@ -80,7 +80,7 @@ const Accomodation = () =>{
             <div className="title-wrap">
                 <h2 className="section-title">Smještaji</h2>
             <hr></hr>
-            <p>Istaknuti objekti na Otoku Viru</p>
+            <p>Istaknuti objekti na .....</p>
             </div>
             
             <div className="accommodation-slider-wrap">

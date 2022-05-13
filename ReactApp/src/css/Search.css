@@ -1,19 +1,18 @@
 .search-wrap{
     display: flex;
+    background: whitesmoke;
 }
 
 .maps-wrap{
     flex: 3;
+    height: 100vh;
 }
 .search-accommodation{
     display: flex;
     flex-wrap: wrap;
-    flex: 2;
-    width: max-content;
-    height: 100vh;
-    background: whitesmoke;
-    overflow-y: scroll;
+    overflow-y: auto;
     align-content: flex-start;
+    padding: 10px 5px 0px 0px;
 }
 .search-accommodation-wrap {
     padding: 0px 0px 20px 15px;
@@ -58,4 +57,54 @@
 }
 .search-accommodation-thumbnail, .search-accommodation-description{
     position: relative;
+}
+.leaflet-popup-content{
+    margin: 0px;
+}
+
+.maps-wrap .search-accommodation-wrap{
+    width: 100%;
+    padding: 0px;
+}
+.leaflet-popup-content-wrapper{
+    padding: 0px;
+}
+div::-webkit-scrollbar {
+    width: 5px;
+}
+   
+div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+   
+div::-webkit-scrollbar-thumb {
+    background-color: #2e3f6e;
+    outline: 0px solid white;
+    border-radius: 10px;
+}
+
+.listing-wrap{
+    height: 100vh;
+    width: 40%;
+    max-width: 40%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-filters{
+    padding: 10px 15px 0px 15px;
+}
+
+.search-filters select:focus-visible{
+    outline:1px solid #ebebeb;
+} 
+
+.search-button.filter{
+    width: 100%;
+    margin: 0px;
+    border-radius: 0px;
+}
+.filter-wrap{
+    background: white;
 }
