@@ -51,6 +51,7 @@ const BasicStep = (props) => {
     }
 
     useEffect(() => {
+        console.log(centerpoint);
         let isMounted = true;
         const controller = new AbortController();
         const getAccommodation = async () => {
@@ -124,7 +125,7 @@ const BasicStep = (props) => {
 
     useEffect(() => {
         optimizedFn({ city }, { street });
-        setCenterPooint({ position });
+        setCenterPooint(position);
     }, [city, street])
 
     const handleStepUpdate = (e,value) =>{
@@ -136,39 +137,11 @@ const BasicStep = (props) => {
 
     return (
         <>
+            
             <div className="add-accommodation">
-                <div className="progress-bar-wrap">
-                    <div className={"step step-1" + (currentStep >= 1 ? ' active' : '')}>
-                        <div className="step-number-wrap ">
-                            <span className="step-number ">1</span>
-                        </div>
-                    </div>
-                    <div className={"step step-2" + (currentStep >= 2 ? ' active' : '')}>
-                        <div className="step-number-wrap">
-                            <span className="step-number">2</span>
-                        </div>
-                    </div>
-                    <div className={"step step-3" + (currentStep >= 3 ? ' active' : '')}>
-                        <div className="step-number-wrap">
-                            <span className="step-number">3</span>
-                        </div>
-                    </div>
-                    <div className={"step step-4" + (currentStep >= 4 ? ' active' : '')}>
-                        <div className="step-number-wrap">
-                            <span className="step-number">4</span>
-                        </div>
-                    </div>
-                    <div className={"step step-5" + (currentStep >= 5 ? ' active' : '')}>
-                        <div className="step-number-wrap">
-                            <span className="step-number">5</span>
-                        </div>
-                    </div>
-                    <div className={"progress-bar progress-"+currentStep}>
-
-                    </div>
-                </div>
-
+            
                 <div className="basic-info object-submit-wrap">
+                <h2 className='step-title'>Osnovni Detalji</h2>
                     <div className="input full column">
                         <label htmlFor="name">Ime smještaja</label>
                         <input type="text" id="name" value={name} onChange={e => setName(e.target.value)}></input>

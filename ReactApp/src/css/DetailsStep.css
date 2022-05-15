@@ -1,0 +1,44 @@
+.add-button-wrap{
+    text-align: left;
+}
+
+.add-service{
+    padding: 10px;
+    border: 0px;
+    border-radius: 10px;
+    color: white;
+    transition: 500ms;
+    background-color: #4db7fe;
+}
+
+.remove-service{
+    position: relative;
+    font-size: 18px;
+    color: white;
+    width: 24px;
+    height: 24px;
+    background-color: #ff2d2d;
+    border: 0px;
+    margin-top: 10PX;
+    border-radius: 40px;
+}
+
+.Section-title{
+    text-align: left;
+}
+
+.services-wrap .input.col-2{
+    align-items: center;
+}
+
+.text-area{
+font-size: 14px;
+height: 200px;
+word-break: break-word;
+resize: none;
+border: 1px solid #c8c8c8;
+}
+
+.text-area:focus-visible{
+    outline: 1px solid #2e3f6e;
+}

@@ -59,3 +59,7 @@
     font-weight: 700;
     color: #323232;
 }
+
+.profile-content-wrap{
+    text-align: -webkit-center;
+}

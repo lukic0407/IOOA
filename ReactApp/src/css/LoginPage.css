@@ -59,6 +59,10 @@
     font-size: 0.923em;
     position: relative;
     overflow: hidden;
+    transition: 500ms;
+}
+.login-button:hover{
+    background-color: #384F95;
 }
 
 .form-reminder{

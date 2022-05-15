@@ -211,3 +211,10 @@
     margin-top: 30px;
     text-align: -webkit-center;
 }
+
+.step-button:hover, .add-service:hover{
+    background-color: #2e3f6e;
+}
+.step-title{
+    margin-top: 0px;
+}
