@@ -20,7 +20,9 @@ const addAccommodation = async (req,res)=>{
     })
     }
 
-    const {name,
+    const {
+        user_id,
+        name,
         type,
         tags, //
         street,
@@ -33,10 +35,11 @@ const addAccommodation = async (req,res)=>{
     } = req.body
 
     console.log(req.body);
-    if(!name || !type || !tags || !street || !city || !contactNumber || !website){
+    if(!user_id || !name || !type || !tags || !street || !city || !contactNumber || !website){
         return res.status(400).json("message: Bad user data")
     }
     const accommodation = new accommodationModel({
+        ownedby_id:user_id,
         name:name,
         type:type,
         tags:tags,

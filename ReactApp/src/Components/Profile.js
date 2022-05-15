@@ -24,7 +24,7 @@ const Profile = () =>{
             <div className='side-menu-wrap'> 
             <div className='side-menu'> 
                 <ul className='menu-list'>
-                <li className='list-item' key={'nadzorna-ploca'}>
+                    <li className='list-item' key={'nadzorna-ploca'}>
                         <Link to='/profil/nadzorna_ploca'>Nadzorna Ploča</Link></li>
                     <li className='list-item' key={'dodaj-objekt'}>
                         <Link to='/profil/dodaj_smjestaj'>Dodaj Objekt</Link></li>
@@ -32,7 +32,7 @@ const Profile = () =>{
                 </ul>
             </div>
             </div> 
-            <main>
+            <main className='profile-content-wrap'>
             <Outlet/>
             </main>
             </div>

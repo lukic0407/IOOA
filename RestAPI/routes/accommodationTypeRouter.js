@@ -4,6 +4,6 @@ const router = express.Router()
 
 router.route('/')
     .get(accommodationController.getAccommodationTypes)
-    .post(accommodationController.addAccommodationType)
+    .post(accommodationController.addAccommodationType) //SECURITY RISK, ONLY ADMIN ACCESS (VERIFY ROLES)
     
 module.exports = router

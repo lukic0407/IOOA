@@ -2,13 +2,14 @@ import '../css/Search.css'
 import React, { useRef } from "react";
 import { useState, useEffect, useLayoutEffect } from "react"
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import {useParams, useNavigate, useLocation, Link } from 'react-router-dom'
 import locationIcon from '../img/Icons/Location-Icon.svg'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import L from 'leaflet';
 import osm from "../context/OsmProvider"
 
 const Search = () => {
+    const {category} = useParams();
     const ZOOM_LEVEL = 13;
     const [accommodation, setAccommodations] = useState();
     const axiosPrivate = useAxiosPrivate();
@@ -18,6 +19,7 @@ const Search = () => {
     const test_position = [44.298982, 15.1133578]
     const [types, setTypes] = useState('');
     const [filterType, setFilterType] = useState(0);
+    const [selectedType, setSelectedType] = useState(0);
 
     var MapTestIcon = L.icon({
         iconUrl: require('../img/Icons/Map_Icon.png'),
@@ -25,6 +27,14 @@ const Search = () => {
         iconAnchor: [32, 64], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -64] // point from which the popup should open relative to the iconAnchor
     });
+
+    useEffect(()=>{
+        console.log(category);
+        if(category){
+            setFilterType(category);
+            setSelectedType(category);
+        }
+    },[])
 
     useEffect(() => {
         let isMounted = true;
@@ -73,6 +83,10 @@ const Search = () => {
 
     }, []);
 
+    const handleSearch = () =>{
+        setFilterType(selectedType);
+    }
+
     return (
         <>
             <div className="search-wrap">
@@ -81,8 +95,8 @@ const Search = () => {
                         <div className='search-filters'>
                             <div className='input search-filters col-3'>
                                 <div className='item-33'>
-                                    <select id="type" name="type" value={filterType} onChange={e => setFilterType(e.target.value)}>
-                                        <option value={0}>Odaberite tip objekta</option>
+                                    <select id="type" name="type" value={selectedType} onChange={e => setSelectedType(e.target.value)}>
+                                        <option value={0}>Svi tipovi objekta</option>
                                         {types?.length
                                             ? (types.map(type => <option value={type?.name}>{type?.name}</option>))
                                             : <option>Error, No types could be found</option>
@@ -92,7 +106,7 @@ const Search = () => {
                             </div>
                         </div>
                         <div className='input'>
-                                <button className='search-button filter'>Pretraga</button>
+                                <button className='search-button filter' onClick={handleSearch}>Pretraga</button>
                             </div>
                     </div>
 

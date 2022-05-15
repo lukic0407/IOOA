@@ -36,10 +36,12 @@ var multipleUpload = upload.fields([{name: 'images', maxCount:1}, {name: 'galler
 
 //Getting all users
 router.route('/')
-    .post(multipleUpload, accommodationController.addAccommodation)
+    .post(verifyJWT.verifyJWT,verifyRoles(9971),multipleUpload, accommodationController.addAccommodation) 
     .get(accommodationController.getAccommodations)
+    
 
 router.route('/:id')
-    .get(accommodationIdMiddleWare.getAccommodation ,accommodationController.getAccommodation)
+    .get(accommodationIdMiddleWare.getAccommodation, accommodationController.getAccommodation)
+    .delete()  //JWT TOKEN CHECK AND CHECK IF 
 
 module.exports = router

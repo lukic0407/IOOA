@@ -17,6 +17,7 @@ const loginUser = async (req, res) => {
         const roles = Object.values(foundUser[0]['roles']).filter(Boolean)
         const accessToken = jwt.sign(
             { "userInfo":{
+                "user_id": foundUser[0]['_id'].valueOf(),
                 "username": foundUser[0]['username'],
                 "roles": roles
                 }
@@ -29,13 +30,13 @@ const loginUser = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '1d' }
         );
-
+        const user_id = foundUser[0]['_id'].valueOf();
         const currentUser = foundUser[0]
         currentUser.refreshToken = refreshToken
-        const TokenUser = await currentUser.save(currentUser)
         console.log(roles);
+        const TokenUser = await currentUser.save(currentUser);
         res.cookie('jwt',refreshToken,{httpOnly:true, maxAage: 24 * 60 * 60 * 1000, sameSite: 'None', secure:true});
-        res.status(200).json({accessToken, roles});
+        res.status(200).json({accessToken, roles, user_id});
     } else {
         res.status(401).json("message: Wrong password")
     }

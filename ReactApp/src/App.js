@@ -13,7 +13,7 @@ import AccomodationSingle from './Components/AccommodationSingle';
 import AddAccomodationForm from './Components/AddAccomodationForm';
 import Profile from './Components/Profile';
 import Search from './Components/Search';
-
+import Dashboard from './Components/Dashboard';
 const ROLES = {
   "Owner": 9971,
   "Admin": 1573,
@@ -31,11 +31,12 @@ function App() {
           <Route path="linkpage" element={<LinkPage></LinkPage>}></Route>
           <Route path="prijava" element={<Login />} />
           <Route path="registracija" element={<Register />} />
+          <Route path="/smjestaji/:category" element={<Search></Search>}></Route>
           <Route path="/smjestaji" element={<Search></Search>}></Route>
           {/*Private pages*/}
           <Route element={<RequireAuth allowedRoles={[ROLES.Owner]}></RequireAuth>}>
           <Route path="/profil" element={<Profile />}>
-            <Route path="nadzorna_ploca" element={<></>}></Route>
+            <Route path="nadzorna_ploca" element={<Dashboard></Dashboard>}></Route>
             <Route path="dodaj_smjestaj" element={<AddAccomodationForm></AddAccomodationForm>}></Route>
           </Route>
           </Route>

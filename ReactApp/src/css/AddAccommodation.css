@@ -1,16 +1,16 @@
-.add-accommodation{
-    background:#f6f6f6 ;
+.add-accommodation {
+    background: #f6f6f6;
 }
 
-.add-accommodation form{
+.add-accommodation form {
     text-align: -webkit-center;
     padding: 20px;
     background: whitesmoke;
 }
 
-.basic-info.object-submit-wrap{
-    width: max-content;
-    min-width: 800px;
+.basic-info.object-submit-wrap {
+    width: 100%;
+    max-width: 800px;
     background: #ffffff;
     padding: 20px;
     border-radius: 10px;
@@ -19,7 +19,7 @@
     border-color: #d5d5d5;
 }
 
-.input.full{
+.input.full {
     display: flex;
     margin-bottom: 5px;
     width: 100%;
@@ -27,42 +27,44 @@
     align-content: flex-start;
 }
 
-.input.full.column{
+.input.full.column {
     flex-direction: column;
 }
 
-.input.full.row{
+.input.full.row {
     flex-direction: row;
 }
 
-.input.full input{
+.input.full input {
     width: 95%;
 }
 
-.input.col-2, .input.col-3{
+.input.col-2,
+.input.col-3 {
     display: flex;
     width: 100%;
     gap: 20px;
 }
 
-.item-50{
+.item-50 {
     width: 50%;
 }
 
-.item-50 .thumbnail.image-preview{
+.item-50 .thumbnail.image-preview {
     max-width: 370px;
 }
 
-.item-50 .thumbnail.image-preview img{
+.item-50 .thumbnail.image-preview img {
     width: 100%;
     border-radius: 20px;
 }
 
-.item-33{
+.item-33 {
     width: 31%;
 }
 
-.input input, .input select{
+.input input,
+.input select {
     line-height: 19px;
     padding: 14px 20px;
     width: 90%;
@@ -73,11 +75,12 @@
     background: #f9f9f9;
     border: 1px solid #e5e7f2;
 }
-.input select{
+
+.input select {
     width: 100%;
 }
 
-.input label{
+.input label {
     display: block;
     text-align: left;
     margin-bottom: 10px;
@@ -87,6 +90,124 @@
     display: inline-block;
 }
 
-.map-wrap, .leaflet-container{
+.map-wrap,
+.leaflet-container {
     height: 300px;
+}
+
+.step {
+    position: absolute;
+    background: #4db7fe;
+    height: 60px;
+    width: 60px;
+    left: 20%;
+    top: 50%;
+    z-index: 1;
+    border-radius: 40px;
+    transform: translateY(-50%);
+    transition: 1s;
+}
+
+.progress-bar-wrap {
+    margin: 20px 0px 20px 0px;
+    position: relative;
+    width: 100%;
+    max-width: 840px;
+    height: 40px;
+    text-align: left;
+    background: #e1e1e1;
+    border-radius: 10px;
+}
+
+.add-accommodation {
+    text-align: -webkit-center;
+}
+
+.progress-bar {
+    transition: 1s;
+    position: relative;
+    height: 40px;
+    background: #2e3f6e;
+    width: 15%;
+    border-radius: 10px;
+}
+
+.progress-bar.progress-1{
+    width: 15%;
+}
+.progress-bar.progress-2{
+    width: 35%;
+}
+.progress-bar.progress-3{
+    width: 55%;
+}
+.progress-bar.progress-4{
+    width: 75%;
+}
+.progress-bar.progress-5{
+    width: 100%;
+}
+
+.step-number-wrap {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-number {
+    color: white;
+    font-size: 28px;
+    padding-bottom: 5px;
+    width: max-content;
+}
+
+.active {
+    background: #2e3f6e;
+}
+
+.step-1 {
+    left: 10%;
+}
+
+.step-2 {
+    left: 30%;
+}
+
+.step-3 {
+    left: 50%;
+}
+
+.step-4 {
+    left: 70%;
+}
+
+.step-5 {
+    left: 95%;
+}
+
+.step-wrap button {
+    font-size: 16px;
+    padding: 10px 20px 10px;
+    top: 45%;
+    z-index: 2;
+    color: white;
+    background-color: #4db7fe;
+    transition: 500ms;
+    border: 0px;
+    border-radius: 10px;
+}
+
+.change-steps{
+    width: 100%;
+    display: flex;
+    max-width: 840px;
+    justify-content: space-between;
+}
+
+.step-wrap{
+    margin-top: 30px;
+    text-align: -webkit-center;
 }

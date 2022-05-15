@@ -1,6 +1,10 @@
 const mongoose = require ('mongoose')
 
 const AccommodationSchema = new mongoose.Schema({
+    ownedby_id:{
+        type: String,
+        required:true
+    },
     name:{
         type: String,
         required: true

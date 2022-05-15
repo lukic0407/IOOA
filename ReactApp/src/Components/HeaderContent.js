@@ -2,17 +2,9 @@ import React from "react";
 import "../css/Home.css"
 import {Link} from 'react-router-dom'
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import useLogout from "../hooks/useLogout";
 
 const HeaderContent = () =>{
-    const logout = useLogout()
-    const navigate = useNavigate();
-    const signOut= async () =>{
-        await logout();
-        navigate ('/')
-    }
-    
+
         
     const {logedIn} = useAuth()
     console.log(logedIn)

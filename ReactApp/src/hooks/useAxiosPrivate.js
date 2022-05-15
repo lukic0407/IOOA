@@ -9,7 +9,7 @@ const useAxiosPrivate = () =>{
     const {auth} = useAuth();
 
     useEffect(()=>{
-
+        console.log("trying");
         const requestIntercept = axiosPrivate.interceptors.request.use(
             config=>{
                 if(!config.headers['Authorization']){

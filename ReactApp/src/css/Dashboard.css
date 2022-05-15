@@ -1,0 +1,77 @@
+.dashboard-wrap, .profile-content-wrap{
+    width:100%;
+    flex:11;
+}
+
+.dashborad-accommodation-wrap{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.dashborad-accommodation-wrap .accommodation-wrap{
+    position:relative;
+    overflow:hidden;
+    min-width: 360px;
+    width:45%;
+    margin-top:20px;
+    max-width: 480px;
+}
+
+.dashborad-accommodation-wrap .accommodation-description{
+    width: 100%;
+}
+
+.options{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+}
+.modal-wrap button{
+    padding: 12px;
+    width: 20%;
+}
+.options button, .modal-wrap button{
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+    border: 0px;
+    color: white;
+    transition: 500ms;
+    margin-left:5px;
+}
+
+.options .edit, .modal-wrap .yes-button{
+background: #4db7fe;
+}
+
+.options .delete, .modal-wrap .no-button{
+    background: #ff4747;
+}
+
+.options .edit:hover, .modal-wrap .yes-button:hover{
+    background: #2e3f6e;
+}
+.options .delete:hover, .modal-wrap .no-button:hover{
+    background: #ff0000;
+}
+.modal-wrap{
+    z-index: 3;
+    padding: 30px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: whitesmoke;
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+.modal-overlay{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background: #00000082;
+    top: 0%;
+    left: 0%;
+    z-index: 2;
+}

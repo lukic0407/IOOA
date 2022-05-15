@@ -51,37 +51,49 @@ const Categories = () =>{
                 </div>
                     <div className="abstract-gallery contain">
                         <div className="image-2">
+                            
                             <div className="image-holder">
+                            <Link to="smjestaji/Apartman">
                                 <img src={placeholder_01}></img>
                                 <div className="category-description">
                                     <h3>Apartmani</h3>
                                 </div>
+                                </Link>
                             </div>
+                            
                             <div className="image-holder">
+                            <Link to="smjestaji/Kuća za odmor">
                                 <img src={placeholder_02}></img>
                                 <div className="category-description">
                                     <h3>Kuće za odmor</h3>
                                 </div>
+                                </Link>
                             </div>
                         </div>
                         <div className="image-3">
                             <div className="image-holder">
+                            <Link to="smjestaji/Stan">
                                 <img src={placeholder_03}></img>
                                 <div className="category-description">
                                     <h3>Stanovi</h3>
                                 </div>
+                                </Link>
                             </div>
                             <div className="image-holder">
+                            <Link to="smjestaji/Villa">
                                 <img src={placeholder_04}></img>
                                 <div className="category-description">
                                     <h3>Ville</h3>
                                 </div>
+                                </Link>
                             </div>
                             <div className="image-holder">
+                            <Link to="smjestaji/Eco">
                                 <img src={placeholder_05}></img>
                                 <div className="category-description">
                                     <h3>Eco</h3>
                                 </div>
+                                </Link>
                             </div>
                         </div>
                     </div>

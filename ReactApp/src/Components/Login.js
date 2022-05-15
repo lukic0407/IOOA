@@ -40,11 +40,11 @@ const Login = () =>{
                     headers:{'Content-Type':'application/json'},
                     withCredentials: true
                 })
-            console.log(JSON.stringify(response?.data))
-            console.log(response)
+
             const accessToken = response?.data?.accessToken
+            const user_id = response?.data?.user_id
             const roles = response?.data?.roles
-            setAuth({user,password,roles,accessToken})
+            setAuth({user_id,user,roles,accessToken})
             setLogedIn(true)
             setUser('')
             setPassword('')
