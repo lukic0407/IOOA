@@ -1,0 +1,58 @@
+.chat-contacts{
+    flex: 2 1;
+    border: 2px solid #4db7fe4a;
+    border-radius: 10px;
+}
+.chat-tooltip{
+    margin: auto;
+}
+.chat-window-wrap{
+    margin-top: 20px;
+    height: 60vh;
+    min-height: 500px;
+    width: 100%;
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+}
+.chat-window{
+    display: flex;
+    position: relative;
+    flex: 4 1;
+    flex-direction: column;
+}
+.no-bottom-margin{
+    margin-bottom: 0px !important;
+}
+.message-input{
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+}
+.message-input svg{
+    position: absolute;
+    right: 0px;
+}
+.messages{
+    height: 100%;
+    overflow: auto;
+}
+.message{
+    width: 100%;
+}
+.message p{
+    margin: 0px;
+    color: white;
+}
+.my-message, .other-user-message{
+    padding: 10px;
+    width: max-content;
+    border-radius: 10px;
+    margin: 10px;
+}
+.my-message{
+    background: #0b273a61;
+}
+.other-user-message{
+    background: rgb(77 183 254);
+}

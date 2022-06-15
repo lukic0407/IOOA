@@ -1,0 +1,14 @@
+.image-preview .set-as button{
+    padding: 5px;
+    background-color: #4db7fe;
+    border: 0px;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.image-preview .set-as{
+    text-align: left;
+    margin: 10px 0px 0px 10px;
+    position: absolute;
+}

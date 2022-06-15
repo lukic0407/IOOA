@@ -4,18 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthProvider';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ChatProvider from './context/ChatProvider';
 const header = ReactDOM.createRoot(document.getElementById('header'));
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <>
     <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/*" element={<App></App>}></Route>
-        </Routes>
-      </AuthProvider>
+      <ChatProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/*" element={<App></App>}></Route>
+          </Routes>
+        </AuthProvider>
+      </ChatProvider>
     </BrowserRouter>
   </>
 );

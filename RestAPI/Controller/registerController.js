@@ -2,19 +2,27 @@ const userModel = require('../models/userModel')
 const bcrypt = require('bcrypt')
 require('dotenv').config();
 
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
 const registerUser =  async (req,res)=>{
-    const {username,email,password} = req.body
-    if(!username || !email || !password){
+    const {username,email,password,name,surname} = req.body
+    if(!username || !email || !password || !name || !surname){
+        console.log("here");
+        return res.status(400).json("message: Bad user data")
+    }else if(!USER_REGEX.test(username) || !PWD_REGEX.test(password)){
+        console.log("there");
         return res.status(400).json("message: Bad user data")
     }
     const duplicateUser = await userModel.find({username: username})
-    console.log(duplicateUser.length)
     if(duplicateUser.length){
         return res.status(409).json("message: User already exists")
     }
     const hashedpassword = await bcrypt.hash(password,11)
     const user = new userModel({
         username:username,
+        name:name,
+        surname:surname,
         email: email,
         password: hashedpassword,
         roles: {

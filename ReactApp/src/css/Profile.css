@@ -2,6 +2,7 @@
     min-height: 250px;
     height: 20vh;
     background-color: #4DB7FE;
+    background-image: url('../img/background_shapes.png');
 }
 
 .main-content-wrap{
@@ -12,7 +13,7 @@
     display: flex;
     max-width: 1200px;
     margin: auto;
-   
+    min-height:80vh;
 }
 
 .menu-list{

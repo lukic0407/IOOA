@@ -2,7 +2,8 @@ const mongoose = require ('mongoose')
 
 const AccommodationSchema = new mongoose.Schema({
     ownedby_id:{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"user",
         required:true
     },
     name:{
@@ -46,12 +47,32 @@ const AccommodationSchema = new mongoose.Schema({
         type:Object,
         required: true
     },
-    images_single:{
+    thumbnail:{
         type:String,
         required:false
     },
-    images_multiple:{
+    gallery:{
         type:Array,
+        required:false
+    },
+    headerphotos:{
+        type:Array,
+        required:false
+    },
+    content:[{
+        type: Object,
+        required:false,
+        categoryId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"AccommodationContentCategories",
+        },
+        contentId:[{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"AccommodationContent",
+        }],     
+    }],
+    description:{
+        type:String,
         required:false
     }
 })

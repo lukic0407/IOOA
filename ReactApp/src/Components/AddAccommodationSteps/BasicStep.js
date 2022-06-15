@@ -1,16 +1,14 @@
 import 'leaflet/dist/leaflet.css';
-import { useEffect, useRef, useMemo, useCallback } from "react"
+import { useEffect, useRef, useMemo, useCallback, useState } from "react"
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import osm from "../../context/OsmProvider"
+import L from 'leaflet';
+
 
 const BasicStep = (props) => {
     const axiosPrivate = useAxiosPrivate();
     const {
-        thumbnail,
-        setThumbnail,
-        thumbnailURL,
-        setThumbnailURL,
         centerpoint,
         setCenterPooint,
         name,
@@ -35,10 +33,9 @@ const BasicStep = (props) => {
         ZOOM_LEVEL,
         position,
         setPosition,
-        currentStep,
-        setCurrentStep
+        handleStepUpdate
     } = props;
-
+    const [statusMsg, setStatusMsg] = useState('');
     var MapTestIcon = L.icon({
         iconUrl: require('../../img/Icons/Map_Icon.png'),
         iconSize: [64, 64], // size of the icon
@@ -46,11 +43,8 @@ const BasicStep = (props) => {
         popupAnchor: [0, -64] // point from which the popup should open relative to the iconAnchor
     });
 
-    function onImageChange(e) {
-        setThumbnail([...e.target.files])
-    }
-
     useEffect(() => {
+        
         console.log(centerpoint);
         let isMounted = true;
         const controller = new AbortController();
@@ -73,14 +67,6 @@ const BasicStep = (props) => {
             isMounted = false;
         })
     }, [])
-
-    useEffect(() => {
-        if (thumbnail.length < 1) return;
-        const newImageUrl = [];
-        thumbnail.forEach(image => newImageUrl.push(URL.createObjectURL(image)));
-        setThumbnailURL(newImageUrl)
-    }, [thumbnail])
-
 
     const markerRef = useRef(null)
     const eventHandlers = useMemo(
@@ -128,28 +114,43 @@ const BasicStep = (props) => {
         setCenterPooint(position);
     }, [city, street])
 
-    const handleStepUpdate = (e,value) =>{
-        e.preventDefault();
-        let newStepValue = currentStep + (value)
-        newStepValue >= 1 && newStepValue <= 5 && setCurrentStep(newStepValue);
-        return false;
+    const checkBasicInfo = (e) =>{
+        if(!name){
+            setStatusMsg("Neispravan unos imena");
+            return false;
+        }else if(!type){
+            setStatusMsg("Neispravan unos tipa smještaja");
+            return false;
+        }else if(!street){
+            setStatusMsg("Neispravan unos ulice");
+            return false;
+        }else if(!city){
+            setStatusMsg("Neispravan unos grada");
+            return false;
+        }else if(!email){
+            setStatusMsg("Neispravan unos emaila");
+            return false;
+        }else if(!contactNumber){
+            setStatusMsg("Neispravan unos kontakt broja");
+            return false;
+        }
+        handleStepUpdate(e,1);
+        return true
     }
 
     return (
         <>
-            
-            <div className="add-accommodation">
-            
+            <div className="add-accommodation">  
                 <div className="basic-info object-submit-wrap">
                 <h2 className='step-title'>Osnovni Detalji</h2>
                     <div className="input full column">
-                        <label htmlFor="name">Ime smještaja</label>
+                        <label htmlFor="name">Ime smještaja *</label>
                         <input type="text" id="name" value={name} onChange={e => setName(e.target.value)}></input>
                     </div>
 
                     <div className="input col-2">
                         <div className="item-50">
-                            <label htmlFor="type">Tip smještaja</label>
+                            <label htmlFor="type">Tip smještaja *</label>
                             <select id="type" name="type" value={type} onChange={e => setType(e.target.value)}>
                                 <option>Odaberite tip objekta</option>
                                 {types?.length
@@ -166,11 +167,11 @@ const BasicStep = (props) => {
 
                     <div className="input col-2">
                         <div className="item-50">
-                            <label htmlFor="street">Ulica</label>
+                            <label htmlFor="street">Ulica *</label>
                             <input type="text" id="street" value={street} onChange={e => setStreet(e.target.value)}></input>
                         </div>
                         <div className="item-50">
-                            <label htmlFor="city">Grad</label>
+                            <label htmlFor="city">Grad *</label>
                             <input type="text" id="city" value={city} onChange={e => setCity(e.target.value)}></input>
                         </div>
 
@@ -201,11 +202,11 @@ const BasicStep = (props) => {
                     </div>
                     <div className="input col-3">
                         <div className="item-33">
-                            <label htmlFor="email">E-mail adresa</label>
+                            <label htmlFor="email">E-mail adresa *</label>
                             <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)}></input>
                         </div>
                         <div className="item-33">
-                            <label htmlFor="contactNumber">Kontakt Broj</label>
+                            <label htmlFor="contactNumber">Kontakt Broj *</label>
                             <input type="tel" id="contactNumber" value={contactNumber} onChange={e => setContactNumber(e.target.value)}></input>
                         </div>
                         <div className="item-33">
@@ -213,24 +214,15 @@ const BasicStep = (props) => {
                             <input type="tel" id="web" value={website} onChange={e => setWeb(e.target.value)}></input>
                         </div>
                     </div>
-                    <div className="input col-2">
-                        <div className="item-50">
-                            <label htmlFor="thumbnail">Thumbnail: </label>
-                            <input type="file" accept="image/*" id="thumbnail" name="thumbnail" onChange={onImageChange}></input>
-                        </div>
-                        <div className="item-50">
-                            <div className="thumbnail image-preview">
-                                {thumbnailURL.map((imageSrc) => <img src={imageSrc}></img>)}
-                            </div>
-                        </div>
-                    </div>
+
                     <div className='step-wrap'>
+                        <p>{statusMsg}</p>
                         <div className='change-steps'>
                         <div className='next'>
                                 <button className='step-button' onClick={(e) => handleStepUpdate(e,-1) }>Prethodni korak</button>
                             </div>
                             <div className='prev'>
-                                <button className='step-button' onClick={(e) => handleStepUpdate(e,1)}>Sljedeći korak</button>
+                                <button className='step-button' onClick={(e) => checkBasicInfo(e)}>Sljedeći korak</button>
                             </div>
                         </div>
                     </div>

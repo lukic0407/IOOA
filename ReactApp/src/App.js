@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import logo from './logo.svg';
 import Register from './Components/Register';
 import Login from './Components/Login';
 import Layout from './Components/Layout';
@@ -14,9 +13,12 @@ import AddAccomodationForm from './Components/AddAccomodationForm';
 import Profile from './Components/Profile';
 import Search from './Components/Search';
 import Dashboard from './Components/Dashboard';
+import AddAccomodationContent from './Components/AddAccommodationContent';
+import ChatPage from './Components/ChatPage';
+import MyProfile from './Components/MyProfile';
 const ROLES = {
   "Owner": 9971,
-  "Admin": 1573,
+  "Admin": 3737,
   "Owner_Unlimited": 9962
 }
 
@@ -34,11 +36,18 @@ function App() {
           <Route path="/smjestaji/:category" element={<Search></Search>}></Route>
           <Route path="/smjestaji" element={<Search></Search>}></Route>
           {/*Private pages*/}
-          <Route element={<RequireAuth allowedRoles={[ROLES.Owner]}></RequireAuth>}>
-          <Route path="/profil" element={<Profile />}>
-            <Route path="nadzorna_ploca" element={<Dashboard></Dashboard>}></Route>
-            <Route path="dodaj_smjestaj" element={<AddAccomodationForm></AddAccomodationForm>}></Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]}></RequireAuth>}>
+            <Route path="/profil/dodaj_sadrzaj" element={<Profile />}>
+              <Route path="" element={<AddAccomodationContent></AddAccomodationContent>}></Route>
+            </Route>
           </Route>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Owner]}></RequireAuth>}>
+            <Route path="/profil" element={<Profile />}>
+              <Route path="nadzorna_ploca" element={<Dashboard></Dashboard>}></Route>
+              <Route path="dodaj_smjestaj" element={<AddAccomodationForm></AddAccomodationForm>}></Route>
+              <Route path="razgovori" element={<ChatPage></ChatPage>}></Route>
+              <Route path="moj-profil" element={<MyProfile></MyProfile>}></Route>
+            </Route>
           </Route>
         </Route>
         {/*Other pages*/}

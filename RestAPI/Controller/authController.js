@@ -30,10 +30,9 @@ const loginUser = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '1d' }
         );
-        const user_id = foundUser[0]['_id'].valueOf();
         const currentUser = foundUser[0]
+        const user_id = foundUser[0]['_id'].valueOf();
         currentUser.refreshToken = refreshToken
-        console.log(roles);
         const TokenUser = await currentUser.save(currentUser);
         res.cookie('jwt',refreshToken,{httpOnly:true, maxAage: 24 * 60 * 60 * 1000, sameSite: 'None', secure:true});
         res.status(200).json({accessToken, roles, user_id});

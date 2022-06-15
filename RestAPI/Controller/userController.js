@@ -1,4 +1,8 @@
-const userModel = require('../models/userModel')
+const userModel = require('../models/userModel');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
 const getUsers = async (req,res)=>{
     try{
         const users = await userModel.find()
@@ -10,18 +14,18 @@ const getUsers = async (req,res)=>{
 
 const getUser = (req,res)=>{
     console.log("sending user")
-    res.send(res.person)
+    res.status(200).json({name:res.person.name, surname: res.person.surname, email:res.person.email});
 }
 
-const updateUser = async (req,res)=>{
+const updateBasicUserData = async (req,res)=>{
     if(req.body.name != null){
         res.person.name = req.body.name
     }
-    if(req.body.height != null){
-        res.person.height = req.body.height
+    if(req.body.surname != null){
+        res.person.surname = req.body.surname
     }
-    if(req.body.dateOfRegistration != null){
-        res.person.dateOfRegistration = req.body.dateOfRegistration
+    if(req.body.email != null){
+        res.person.email = req.body.email
     }
     try{
         const person = await res.person.save()
@@ -32,6 +36,9 @@ const updateUser = async (req,res)=>{
 }
 
 const deleteUser = async (req,res)=>{
+    if (!username || !password) {
+        return res.status(400).json("message: Bad user data")
+    }
     try{
         await res.person.remove();
         res.status(200).json({message: 'Removed user sucessfully'})
@@ -40,9 +47,34 @@ const deleteUser = async (req,res)=>{
     }
 }
 
+const updateUserPassword = async (req,res)=>{
+    const {currentpassword,newpassword} = req.body;
+    if (!currentpassword || !newpassword) {
+        return res.status(400).json("message: Bad user data")
+    }else if(!PWD_REGEX.test(newpassword)){
+        return res.status(400).json({message:"Lozinka ne zadovoljava uvjete"})
+    }
+
+    const matchPassword = await bcrypt.compare(currentpassword, res.person.password);
+    if (matchPassword) {
+        const hashedpassword = await bcrypt.hash(newpassword,11)
+        res.person.password = hashedpassword;
+    }else{
+        return res.status(403).json({message:"Kriva trenutna lozinka"})
+    }
+
+    try{
+        const person = await res.person.save()
+        res.status(200).json(person)
+    }catch(err){
+        res.status(400).json({message:err})
+    }
+}
+
 module.exports = {
     getUsers,
     getUser,
-    updateUser,
+    updateBasicUserData,
+    updateUserPassword,
     deleteUser
 }

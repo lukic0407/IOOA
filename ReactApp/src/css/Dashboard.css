@@ -1,11 +1,13 @@
 .dashboard-wrap, .profile-content-wrap{
     width:100%;
     flex:11;
+    margin-left:20px;
 }
 
 .dashborad-accommodation-wrap{
     display: flex;
     justify-content: flex-start;
+    flex-wrap:wrap;
 }
 
 .dashborad-accommodation-wrap .accommodation-wrap{

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import '../../css/DetailsStep.css'
 const DetailsStep = (props) => {
     const {
@@ -10,17 +10,9 @@ const DetailsStep = (props) => {
         setServices,
         description,
         setDescription,
-        currentStep,
-        setCurrentStep
+        handleStepUpdate
     } = props
-
-    const handleStepUpdate = (e, value) => {
-        e.preventDefault();
-        let newStepValue = currentStep + (value)
-        newStepValue >= 1 && newStepValue <= 5 && setCurrentStep(newStepValue);
-        return false;
-    }
-
+    const [statusMsg, setStatusMsg] = useState('');
     useEffect(()=>{
         console.log(services)
         console.log(services.nextID)
@@ -61,12 +53,21 @@ const DetailsStep = (props) => {
         setServices({...services,list:newList});
     }
 
+    const checkBasicDetailInfo = (e) =>{
+        if(!description){
+            setStatusMsg("Molimo vas opišite nam svoj objekt");
+            return false;
+        }
+        handleStepUpdate(e,1);
+        return true
+    }
+
     return (
         <>
             <div className="add-accommodation">
                 <div className="basic-info object-submit-wrap">
                     <div className="input full column">
-                        <label htmlFor="description">Opišite nam svoj smještaj</label>
+                        <label htmlFor="description">Opišite nam svoj smještaj*</label>
                         <textarea className="text-area" id="description" value={description} onChange={e=>setDescription(e.target.value)}></textarea >
                     </div>
                     <div className="services-wrap">
@@ -94,12 +95,13 @@ const DetailsStep = (props) => {
                         </div>
                     </div>
                     <div className='step-wrap'>
+                    <p>{statusMsg}</p>
                         <div className='change-steps'>
                             <div className='next'>
                                 <button className='step-button' onClick={(e) => handleStepUpdate(e, -1)}>Prethodni korak</button>
                             </div>
                             <div className='prev'>
-                                <button className='step-button' onClick={(e) => handleStepUpdate(e, 1)}>Sljedeći korak</button>
+                                <button className='step-button' onClick={(e) => checkBasicDetailInfo(e)}>Sljedeći korak</button>
                             </div>
                         </div>
                     </div>

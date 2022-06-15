@@ -61,9 +61,6 @@ const Accomodation = () =>{
                 pre_check_res = sliderRef.current.clientWidth;
             }
             setScroll({ ...scroll, left: pre_check_res });
-            console.log("local_left left: " + scroll.left);
-            console.log("local_left maxscroll: " + maxscroll);
-            console.log("local_left intframewidth: " + intFrameWidth);
         }else{
             pre_check_res = scroll.left+scrollAmount;
             if(pre_check_res >= 0){
@@ -115,6 +112,7 @@ const Accomodation = () =>{
         </div>
     </div>
     </div>
+
     <div className="spacer-50"></div>
     </>
     )

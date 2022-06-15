@@ -1,11 +1,6 @@
-.add-accommodation {
-    background: #f6f6f6;
-}
-
 .add-accommodation form {
     text-align: -webkit-center;
     padding: 20px;
-    background: whitesmoke;
 }
 
 .basic-info.object-submit-wrap {
@@ -36,7 +31,7 @@
 }
 
 .input.full input {
-    width: 95%;
+    width: 100%;
 }
 
 .input.col-2,
@@ -50,11 +45,14 @@
     width: 50%;
 }
 
-.item-50 .thumbnail.image-preview {
-    max-width: 370px;
+.thumbnail.image-preview {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto auto;
 }
 
-.item-50 .thumbnail.image-preview img {
+.thumbnail.image-preview img {
+    height: 100%;
     width: 100%;
     border-radius: 20px;
 }
@@ -67,13 +65,14 @@
 .input select {
     line-height: 19px;
     padding: 14px 20px;
-    width: 90%;
+    width: 100%;
     margin-bottom: 15px;
     overflow: hidden;
     border-radius: 4px;
     color: #7d93b2;
     background: #f9f9f9;
     border: 1px solid #e5e7f2;
+    box-sizing: border-box;
 }
 
 .input select {
@@ -217,4 +216,24 @@
 }
 .step-title{
     margin-top: 0px;
+}
+.image-wrap{
+    width: 100%;
+    height: 100%;
+}
+
+.selected-thumbnail {
+    background-color: #0aa55d !important;
+}
+
+.selected-header{
+    background-color: #0aa55d !important;
+}
+
+.step-button.add{
+    background-color: #0aa55d;
+}
+
+.step-button.add:hover{
+    background-color: #09e07c;
 }
