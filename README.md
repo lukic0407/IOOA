@@ -1,1 +1,1 @@
-Projekt Iooa
+Projekt Programsko Inženjerstvo
