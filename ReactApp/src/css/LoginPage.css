@@ -24,7 +24,8 @@
 .login-form input{
     line-height: 19px;
     padding: 14px 20px;
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
     margin-bottom: 15px;
     overflow: hidden;
     border-radius: 4px;
@@ -68,3 +69,64 @@
 .form-reminder{
     text-align: left;
 }
+
+.form-reminder .line a{
+    color: #4db7fe;
+    text-decoration: underline;
+}
+.tooltip{
+    text-align: left;
+    max-height: 250px !important;
+}
+.tooltip p, .hidetooltip p{
+    background-color: #f9f9f9;
+    padding: 30px;
+}
+.hidetooltip{
+    max-height: 0px;
+    text-align: left;
+
+}
+.animate500{
+    transition: 2s;
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.fade-in-button {
+    animation: fadeIn 3s;
+    -webkit-animation: fadeIn 3s;
+    -moz-animation: fadeIn 3s;
+    -o-animation: fadeIn 3s;
+    -ms-animation: fadeIn 3s;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    80% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    80% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    80% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    80% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    80% { opacity: 0; }
+    100% { opacity: 1; }
+  }

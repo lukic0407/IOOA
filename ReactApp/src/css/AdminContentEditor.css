@@ -1,0 +1,80 @@
+.content-icon{
+    height: 40px;
+    aspect-ratio: 1/1;
+    width: auto;
+}
+.accommodation-content-wrap{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.space-between{
+    margin-top: 30px;
+}
+.content-holder{
+    display: flex;
+    flex-wrap: wrap;
+}
+.modal-wrap.add-content{
+    max-width: 500px;
+    width: 100%;
+}
+
+.input.full-column.add-content-icon{
+    text-align: left;
+    margin-bottom: 100px;
+}
+
+.input.full-column.add-content-icon .login-button{
+    width: max-content;
+    padding: 12px;
+    margin-top: 0px;
+}
+.add-content-icon-preview{
+    display: flex;
+}
+.icon-preview img{
+    height: 40px;
+    width: 40px;
+    border-radius: 60px;
+}
+.icon-preview{
+    display: flex;
+    background: #4db7fe3b;
+    height: 48px;
+    width: 48px;
+    text-align: center;
+    border-radius: 60px;
+    align-items: center;
+    justify-content: space-around;
+    margin-left:15px;
+    margin-right:15px;
+}
+.header-add-accommodation-content{
+    text-align: right;
+}
+.icon-text{
+    font-weight: 500;
+    margin-left: 10px;
+}
+.error{
+    color: #fa5959;
+    font-weight: 500;
+}
+.modal-wrap.add-content .add-category-button{
+    text-align: right;
+}
+.modal-wrap.add-content .add-category-button-return{
+    text-align: left;
+}
+.delete-sign{
+    cursor: pointer;
+    position: absolute;
+    right: -10px;
+    top: 0px;
+    color: red;
+}
+.delete-sign.left{
+    left: 20px !important;
+    right: 0px !important;
+}

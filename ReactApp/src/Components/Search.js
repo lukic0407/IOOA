@@ -2,14 +2,17 @@ import '../css/Search.css'
 import React, { useRef } from "react";
 import { useState, useEffect, useLayoutEffect } from "react"
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import {useParams, useNavigate, useLocation, Link } from 'react-router-dom'
+import { useParams, useNavigate, useLocation, Link } from 'react-router-dom'
 import locationIcon from '../img/Icons/Location-Icon.svg'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import L from 'leaflet';
+import 'leaflet/dist/leaflet.css'
+import MarkerClusterGroup from "react-leaflet-cluster";
 import osm from "../context/OsmProvider"
+import { handleIcon } from './Icons/Icons';
+import L, { MarkerCluster } from 'leaflet';
 
 const Search = () => {
-    const {category} = useParams();
+    const { category } = useParams();
     const ZOOM_LEVEL = 13;
     const [accommodation, setAccommodations] = useState();
     const axiosPrivate = useAxiosPrivate();
@@ -21,20 +24,15 @@ const Search = () => {
     const [filterType, setFilterType] = useState(0);
     const [selectedType, setSelectedType] = useState(0);
 
-    var MapTestIcon = L.icon({
-        iconUrl: require('../img/Icons/Map_Icon.png'),
-        iconSize: [64, 64], // size of the icon
-        iconAnchor: [32, 64], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -64] // point from which the popup should open relative to the iconAnchor
-    });
+      
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(category);
-        if(category){
+        if (category) {
             setFilterType(category);
             setSelectedType(category);
         }
-    },[])
+    }, [])
 
     useEffect(() => {
         let isMounted = true;
@@ -83,7 +81,7 @@ const Search = () => {
 
     }, []);
 
-    const handleSearch = () =>{
+    const handleSearch = () => {
         setFilterType(selectedType);
     }
 
@@ -106,96 +104,101 @@ const Search = () => {
                             </div>
                         </div>
                         <div className='input'>
-                                <button className='search-button filter' onClick={handleSearch}>Pretraga</button>
-                            </div>
+                            <button className='search-button filter' onClick={handleSearch}>Pretraga</button>
+                        </div>
                     </div>
 
                     <div className="search-accommodation">
                         {accommodation?.length
                             ? (accommodation.map(accommodation => {
-                                return filterType==0 ?
-                                <div className="search-accommodation-wrap">
-                                    <Link to={`../smjestaj/${accommodation?._id}`}>
-                                        <div className="search-accommodation-thumbnail">
-                                            <div className="search-thumbnail-holder">
-                                                <img src={`http://localhost:3001/${accommodation?.images_single}`}></img>
+                                return filterType == 0 ?
+                                    <div className="search-accommodation-wrap">
+                                        <Link to={`../smjestaj/${accommodation?._id}`}>
+                                            <div className="search-accommodation-thumbnail">
+                                                <div className="search-thumbnail-holder">
+                                                    <img src={`http://localhost:3001/${accommodation?.thumbnail}`}></img>
+                                                </div>
+
                                             </div>
+                                        </Link>
+                                        <div className="search-accommodation-description">
+                                            <h3>{accommodation?.name}</h3>
+                                            <img className="icon" src={locationIcon} /><span className="location">{accommodation?.city}, {accommodation?.street}</span>
+                                            <hr></hr>
+                                            <div className="search-accommodation-description-bottom">
+                                                <span className="accommodation-type">{accommodation?.type}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    :
+                                    filterType == accommodation?.type ?
+                                        <div className="search-accommodation-wrap">
+                                            <Link to={`../smjestaj/${accommodation?._id}`}>
+                                                <div className="search-accommodation-thumbnail">
+                                                    <div className="search-thumbnail-holder">
+                                                        <img src={`http://localhost:3001/${accommodation?.thumbnail}`}></img>
+                                                    </div>
 
+                                                </div>
+                                            </Link>
+                                            <div className="search-accommodation-description">
+                                                <h3>{accommodation?.name}</h3>
+                                                <img className="icon" src={locationIcon} /><span className="location">{accommodation?.city}, {accommodation?.street}</span>
+                                                <hr></hr>
+                                                <div className="search-accommodation-description-bottom">
+                                                    <span className="accommodation-type">{accommodation?.type}</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </Link>
-                                    <div className="search-accommodation-description">
-                                        <h3>{accommodation?.name}</h3>
-                                        <img className="icon" src={locationIcon} /><span className="location">{accommodation?.city}, {accommodation?.street}</span>
-                                        <hr></hr>
-                                        <div className="search-accommodation-description-bottom">
-                                            <span className="accommodation-type">{accommodation?.type}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                :
-                                filterType==accommodation?.type ?
-                                <div className="search-accommodation-wrap">
-                                <Link to={`../smjestaj/${accommodation?._id}`}>
-                                    <div className="search-accommodation-thumbnail">
-                                        <div className="search-thumbnail-holder">
-                                            <img src={`http://localhost:3001/${accommodation?.images_single}`}></img>
-                                        </div>
+                                        : <></>
 
-                                    </div>
-                                </Link>
-                                <div className="search-accommodation-description">
-                                    <h3>{accommodation?.name}</h3>
-                                    <img className="icon" src={locationIcon} /><span className="location">{accommodation?.city}, {accommodation?.street}</span>
-                                    <hr></hr>
-                                    <div className="search-accommodation-description-bottom">
-                                        <span className="accommodation-type">{accommodation?.type}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            : <></>
-                            
-                        })
+                            })
                             ) : <p>No Accomodations to display</p>
                         }
                     </div>
                 </div>
                 <div className="maps-wrap">
-                    <MapContainer style={{ height: "100%" }} center={centerpoint} zoom={ZOOM_LEVEL} scrollWheelZoom={false}>
-                        <TileLayer attribution={osm.maptiler.attribution} url={osm.maptiler.url} />
+                    <MapContainer className='markercluster-map' style={{ height: "100%" }} center={centerpoint} zoom={ZOOM_LEVEL} scrollWheelZoom={true}>
+                        <TileLayer attribution={osm.maptiler.attribution} url={osm.maptiler.url} /><MarkerClusterGroup
+                        spiderfyOnMaxZoom={true}
+	                    showCoverageOnHover={false}
+	                    zoomToBoundsOnClick={true}>
+                        
                         {accommodation?.length
                             ? (accommodation.map(accommodation => {
-                                return accommodation?.location && typeof accommodation.location['lat'] !== "undefined"
+                                return (filterType == 0 || accommodation?.type == filterType) && accommodation?.location && typeof accommodation.location['lat'] !== "undefined"
                                     ?
-                                    <Marker
-                                        key={accommodation}
-                                        position={test_position} //Za dodati s objekta
-                                        icon={MapTestIcon}>
-                                        <Popup minWidth={90}>
-                                            <div className="search-accommodation-wrap">
-                                                <Link to={`../smjestaj/${accommodation?._id}`}>
-                                                    <div className="search-accommodation-thumbnail">
-                                                        <div className="search-thumbnail-holder">
-                                                            <img src={`http://localhost:3001/${accommodation?.images_single}`}></img>
-                                                        </div>
 
-                                                    </div>
-                                                </Link>
-                                                <div className="search-accommodation-description">
-                                                    <h3>{accommodation?.name}</h3>
-                                                    <img className="icon" src={locationIcon} /><span className="location">{accommodation?.city}, {accommodation?.street}</span>
-                                                    <hr></hr>
-                                                    <div className="search-accommodation-description-bottom">
-                                                        <span className="accommodation-type">{accommodation?.type}</span>
+                                        <Marker
+                                            position={accommodation.location} //Za dodati s objekta
+                                            icon={handleIcon(accommodation?.type)}>
+                                            <Popup minWidth={300}>
+                                                <div className="search-accommodation-wrap">
+                                                    <Link to={`../smjestaj/${accommodation?._id}`}>
+                                                        <div className="search-accommodation-thumbnail">
+                                                            <div className="search-thumbnail-holder">
+                                                                <img src={`http://localhost:3001/${accommodation?.thumbnail}`}></img>
+                                                            </div>
+
+                                                        </div>
+                                                    </Link>
+                                                    <div className="search-accommodation-description">
+                                                        <h3>{accommodation?.name}</h3>
+                                                        <img className="icon" src={locationIcon} /><span className="location">{accommodation?.city}, {accommodation?.street}</span>
+                                                        <hr></hr>
+                                                        <div className="search-accommodation-description-bottom">
+                                                            <span className="accommodation-type">{accommodation?.type}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </Popup>
-                                    </Marker>
-                                    : console.log("failde adding markers")
+                                            </Popup>
+                                        </Marker>
+                                    
+                                    : <></>
                             }))
                             : <></>
                         }
-
+                        </MarkerClusterGroup>
                     </MapContainer>
                 </div>
             </div>

@@ -8,13 +8,13 @@ require('dotenv').config()
 
 
 //Getting all users
-router.route('/')
-    .get(userController.getUsers) //SECURITY RISK, NO NEED TO HAVE ACCESS TO ALL USERS
+router.route('/userdata/changepassword')
+    .patch(verifyJWT.verifyJWT,verifyRoles(9971),userIdMiddleWare.getUserToUpdate, userController.updateUserPassword) 
 
-router.route('/:id')
-    .get(verifyJWT.verifyJWT,verifyRoles(9971),userIdMiddleWare.getUser, userController.getUser)
-    .patch(userIdMiddleWare.getUser, userController.updateUser) //SECURITY RISK CHECK ROLES AND IF JWT TOKEN == USER
-    .delete(userIdMiddleWare.getUser, userController.deleteUser) // SECURITY RISK CHECK ROLES ADMIN
+router.route('/userdata/:userid?')
+    .get(userIdMiddleWare.getUser, userController.getUser)
+    .patch(verifyJWT.verifyJWT,verifyRoles(9971),userIdMiddleWare.getUserToUpdate, userController.updateBasicUserData) 
+    //.delete(verifyJWT.verifyJWT,verifyRoles(3737),userIdMiddleWare.getUser, userController.deleteUser) 
     
 
 

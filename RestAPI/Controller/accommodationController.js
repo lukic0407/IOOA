@@ -1,41 +1,58 @@
 const accommodationModel = require('../models/accommodationModel');
+const accommodationContentModel = require('../models/accommodationContentModel');
+const accommodationContentCategoriesModel = require('../models/acommodationContentCategoriesModel');
 const accommodationTypeModel = require('../models/typesModel')
 //const multer = require('multer');
 //const upload = multer({dest:'uploads/'});
 
 const addAccommodation = async (req,res)=>{
-    var images_single = '';
-    if(req?.files?.images){
-        images_single = req?.files?.images[0]?.path;
+    //console.log(req.data);
+    var thumbnail= '';
+    if(req?.files?.thumbnail){
+        thumbnail = req?.files?.thumbnail[0]?.path;
     }
-    const images_multiple = [];
 
+    const gallery = [];
     if(req.files?.gallery){
     req.files?.gallery.forEach(obj =>{
         Object.entries(obj).forEach(([key,value])=>{
             if(key=='path'){
-                images_multiple.push(value);
+                gallery.push(value);
             }
         })
     })
     }
+    console.log(req.body);
+    const headerphotos = [];
+    if(req.files?.headerphotos){
+        req.files?.headerphotos.forEach(obj =>{
+            Object.entries(obj).forEach(([key,value])=>{
+                if(key=='path'){
+                    headerphotos.push(value);
+                }
+            })
+        })
+        }
 
     const {
-        user_id,
         name,
-        type,
-        tags, //
+        tags,
         street,
         city,
         email,
-        contactNumber, // 
+        type,
+        contactNumber,
+        description,
         website, //
-        dateOfAddition,
         location,
+        services,
+        content,
+        dateOfAddition,
+        
     } = req.body
-
+    const user_id = req?.user_id;
     console.log(req.body);
-    if(!user_id || !name || !type || !tags || !street || !city || !contactNumber || !website){
+    if(!user_id || !name || !type  || !street || !city || !contactNumber ){
         return res.status(400).json("message: Bad user data")
     }
     const accommodation = new accommodationModel({
@@ -49,11 +66,15 @@ const addAccommodation = async (req,res)=>{
         contactNumber:contactNumber,
         website:website,
         dateOfAddition:dateOfAddition,
-        images_single:images_single,
-        location:JSON.parse(location)
+        thumbnail:thumbnail,
+        gallery:gallery,
+        headerphotos:headerphotos,
+        location:JSON.parse(location),
+        services:services,
+        content:JSON.parse(content),
+        description:description
     })
     try{
-        //Kreiranje osobe i spremanje u bazu podataka i u varijablu newPerson kako bi mogli posalti to covjeku kao response
         const newAccommodation = await accommodation.save(); 
         //status 201 - objekt kreiran
         res.status(201).json(newAccommodation);
@@ -63,16 +84,77 @@ const addAccommodation = async (req,res)=>{
     }
 }
 
+const addAccommodationContent = async (req, res) => {
+    var icon = '';
+    if (req?.files?.icon) {
+        icon = req?.files?.icon[0]?.path;
+    }
+
+    const {
+        name,
+        category,
+    } = req.body
+
+    
+    if (!category || !icon || !name) {
+        return res.status(400).json("message: Bad user data")
+    }
+
+    const findAccommodationContent = await accommodationContentModel.find({ category: category });
+    if (!findAccommodationContent) {
+
+    } else {
+        console.log("category");
+        
+        const content = [{ icon: icon, name: name }];
+        const accommodationContent = new accommodationContentModel({
+            category: category,
+            content: content
+        })
+        try {
+            const newAccommodationContent = await accommodationContent.save();
+            //status 201 - objekt kreiran
+            res.status(201).json(newAccommodationContent);
+        } catch (err) {
+            //status 400 - User dao krive podatke
+            res.status(500).json({ message: err.message })
+        }
+
+    }
+}
+
 const getAccommodations = async (req,res)=>{
     try{
-        const accommodations = await accommodationModel.find()
+        const accommodations = await accommodationModel.find();
+        
         res.json(accommodations);
     }catch(err){
         res.status(500).json({message: err.message});
     }
 }
 
-const getAccommodation = (req,res)=>{
+const getAccommodation = async (req,res)=>{
+    var newCategoryIdArray = [];
+    var newContentIdArray = [];
+    var newContentArray = [];
+    const content = res.accommodation.content;
+    console.log(content);
+    for (let index = 0; index < content.length; index++) {
+        const element = content[index];
+        const category = await accommodationContentCategoriesModel.findById(element.categoryId);
+        var contentIdArray = element.contentId;
+        if(contentIdArray?.length>0){
+        for (let index = 0; index < contentIdArray.length; index++) {
+            const element = contentIdArray[index];
+            const content = await accommodationContentModel.findById(element);
+            newContentIdArray = [...newContentIdArray,content];
+        }}
+        newCategoryIdArray = {...newCategoryIdArray,category};
+        newContentArray = [...newContentArray,{categoryId:category,contentId:newContentIdArray}];
+    }
+    
+    res.accommodation.content = newContentArray;
+    //console.log(newContentArray);
     res.send(res.accommodation);
 }
 
@@ -105,6 +187,7 @@ const getAccommodationTypes = async (req,res)=>{
 
 module.exports = {
     addAccommodation,
+    addAccommodationContent,
     getAccommodations,
     getAccommodation,
     addAccommodationType,

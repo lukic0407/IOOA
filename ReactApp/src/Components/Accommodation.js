@@ -61,9 +61,6 @@ const Accomodation = () =>{
                 pre_check_res = sliderRef.current.clientWidth;
             }
             setScroll({ ...scroll, left: pre_check_res });
-            console.log("local_left left: " + scroll.left);
-            console.log("local_left maxscroll: " + maxscroll);
-            console.log("local_left intframewidth: " + intFrameWidth);
         }else{
             pre_check_res = scroll.left+scrollAmount;
             if(pre_check_res >= 0){
@@ -97,7 +94,7 @@ const Accomodation = () =>{
                             <Link to={`smjestaj/${accommodation?._id}`}>
                             <div className="accommodation-thumbnail">
                                 <div className="thumbnail-holder">
-                                    <img src={`http://localhost:3001/${accommodation?.images_single}`}></img>
+                                    <img src={`http://localhost:3001/${accommodation?.thumbnail}`}></img>
                                 </div>
                             <div className="accommodation-description">
                                 <h3>{accommodation?.name}</h3>
@@ -115,6 +112,7 @@ const Accomodation = () =>{
         </div>
     </div>
     </div>
+
     <div className="spacer-50"></div>
     </>
     )

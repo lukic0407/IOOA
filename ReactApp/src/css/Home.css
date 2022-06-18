@@ -55,6 +55,7 @@ div::-webkit-scrollbar-thumb {
 }
 
 .button.scroll-right{
+    cursor: pointer !important;
     border-radius: 10px 0px 0px 10px;
     right: -18px;
     line-height: 45px;
@@ -65,6 +66,7 @@ div::-webkit-scrollbar-thumb {
 }
 
 .button.scroll-left{
+    cursor: pointer !important;
     border-radius: 0px 10px 10px 0px;
     left: -18px;
     line-height: 45px;

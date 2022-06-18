@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import Accomodations from "./Accommodation";
 import Categories from "./Categories";
 import Stats from "./Stats";
+import {useNavigate} from 'react-router-dom'
 const HomePage = () =>{
+const navigate = useNavigate();
     const [searchValue, setSearch] = useState('')
 
 
@@ -19,7 +21,7 @@ const HomePage = () =>{
                         onChange={e => setSearch(e.target.value)}
                         value={searchValue}
                     ></input>
-                    <button className="search-button">Pretraga</button>
+                    <button onClick={(e)=>navigate("/smjestaji")} className="search-button">Pretraga</button>
                 </form>
             </div>
             

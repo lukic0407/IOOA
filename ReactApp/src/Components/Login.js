@@ -53,7 +53,7 @@ const Login = () =>{
         } catch (error) {
             if(!error?.response) setErrMsg('No server response')
             else if (error.response?.status===400) setErrMsg('Missing username or password')
-            else if (error.response?.status===401) setErrMsg('Wrong Email or password')
+            else if (error.response?.status===401) setErrMsg('Pogrešno korisničko ime ili lozinka')
             else setErrMsg('Login Failed, please check your login data');
             errRef.current.focus()
             console.log(error)

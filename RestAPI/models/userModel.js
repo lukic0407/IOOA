@@ -5,6 +5,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    name:{
+        type: String,
+        required: true
+    },
+    picture:{
+        type: String,
+        required: false,
+        default:'uploads\accommodation\profile\default_avatar.png'
+    },
+    surname:{
+        type: String,
+        required: true
+    },
     email:{
         type: String,
         required: false
